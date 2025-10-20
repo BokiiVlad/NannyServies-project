@@ -1,0 +1,25 @@
+.logo {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 117%;
+  letter-spacing: -0.02em;
+  color: #fbfbfb;
+}
+.headerBox {
+  display: flex;
+  margin: 52px 128px 20px 128px;
+  justify-content: space-between;
+}
+.link {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+}
+.linkBox {
+  display: flex;
+  gap: 40px;
+}
