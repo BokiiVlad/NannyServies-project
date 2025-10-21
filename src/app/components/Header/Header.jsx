@@ -9,8 +9,8 @@ const Header = () => {
           Nanny.Services
         </p>
 
-        <div className="flex gap-[23px]">
-          <nav className="flex items-center gap-[10px]">
+        <div className="flex gap-23">
+          <nav className="flex items-center gap-10">
             <Link href="/">Home</Link>
             <Link href="/nannies">Nannies</Link>
           </nav>

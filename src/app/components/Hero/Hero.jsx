@@ -16,9 +16,12 @@ const Hero = () => {
           </p>
           <Link
             href="/login"
-            className="inline-block mt-16 border border-[rgba(251,251,251,0.4)] rounded-[30px] px-[37px] py-[12px] w-[229px] h-[48px] font-medium text-[20px] leading-[120%] tracking-[-0.01em] text-[#fbfbfb] text-center"
+            className="inline-flex items-center justify-center gap-[18px] mt-16 border border-[rgba(251,251,251,0.4)] rounded-[30px] px-[37px] py-[12px] w-[229px] h-[48px] font-medium text-[20px] leading-[120%] tracking-[-0.01em] text-[#fbfbfb]"
           >
             Get started
+            <svg width="14" height="16" className="fill-current text-[#fbfbfb]">
+              <use href="/icons/sprite.svg#icon-arrow-top"></use>
+            </svg>
           </Link>
         </div>
 
@@ -38,7 +41,15 @@ const Hero = () => {
           style={{ borderColor: "rgba(251, 251, 251, 0.4)" }}
         />
         <div className="absolute rounded-[20px] w-[284px] h-[118px] bg-[#fbfbfb] right-[50px] bottom-[50px] flex  ">
-          <div className="w-[54px] h-[54px] bg-[var(--bg-div)] rounded-[13px] mt-8 ml-8 mr-[16px]"></div>
+          <div className="w-[54px] h-[54px] bg-[var(--bg-div)] rounded-[13px] mt-8 ml-8 mr-[16px] flex items-center justify-center">
+            <svg
+              width="20"
+              height="15"
+              className="stroke-current fill-current text-white"
+            >
+              <use href="/icons/sprite.svg#icon-check"></use>
+            </svg>
+          </div>
           <div className="mt-8">
             <p className="font-normal text-[16px] text-[rgba(17,16,28,0.5)]">
               Experienced nannies
