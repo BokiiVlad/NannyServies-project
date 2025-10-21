@@ -1,19 +1,23 @@
 import Link from "next/link";
-import style from "./Header.module.css";
+import AuthNav from "../AuthNav/AuthNav.jsx";
 
 const Header = () => {
   return (
-    <div className={style.headerBox}>
-      <p className={style.logo}>Nanny.Services</p>
-      <div className={style.linkBox}>
-        <Link className={style.link} href="/">
-          Home
-        </Link>
-        <Link className={style.link} href="/nannies">
-          Nannies
-        </Link>
+    <header className="absolute top-0 left-0 w-full bg-transparent z-50">
+      <div className="max-w-[1184px] mx-auto flex justify-between items-center mt-[52px] text-white">
+        <p className="text-[30px] font-medium leading-[117%] tracking-[-0.02em]">
+          Nanny.Services
+        </p>
+
+        <div className="flex gap-[23px]">
+          <nav className="flex items-center gap-[10px]">
+            <Link href="/">Home</Link>
+            <Link href="/nannies">Nannies</Link>
+          </nav>
+          <AuthNav />
+        </div>
       </div>
-    </div>
+    </header>
   );
 };
 

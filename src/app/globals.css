@@ -1,8 +1,13 @@
+@import "tailwindcss";
+
+:root {
+  --bg-div: #103931;
+  --bg-blue: #1e3a8a;
+}
+
 *,
 *::before,
 *::after {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -13,7 +18,7 @@ body {
   font-size: 16px;
   line-height: 1.5;
   color: #fff;
-  background-color: #103931;
+  background-color: #fff;
   scroll-behavior: smooth;
 }
 
@@ -32,7 +37,6 @@ a {
   color: inherit;
 }
 
-/* Кнопки */
 button {
   background: none;
   border: none;
@@ -62,12 +66,4 @@ h4,
 h5,
 h6 {
   font-weight: inherit;
-}
-
-section,
-main,
-header,
-footer,
-nav {
-  display: block;
 }
