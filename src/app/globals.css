@@ -37,8 +37,6 @@ a {
 }
 
 button {
-  background: none;
-  border: none;
   cursor: pointer;
   font-family: inherit;
   font-size: inherit;
@@ -50,7 +48,6 @@ select {
   font-family: inherit;
   font-size: inherit;
   outline: none;
-  border: none;
 }
 
 img {
@@ -64,5 +61,4 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: inherit;
 }

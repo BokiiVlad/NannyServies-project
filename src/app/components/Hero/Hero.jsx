@@ -16,7 +16,7 @@ const Hero = () => {
           </p>
           <Link
             href="/login"
-            className="inline-flex items-center justify-center gap-[18px] mt-16 border border-[rgba(251,251,251,0.4)] rounded-[30px] px-[37px] py-[12px] w-[229px] h-[48px] font-medium text-[20px] leading-[120%] tracking-[-0.01em] text-[#fbfbfb]"
+            className="hover:bg-[rgba(251,251,251,0.2)] transition-colors duration-300 inline-flex items-center justify-center gap-[18px] mt-16 border border-[rgba(251,251,251,0.4)] rounded-[30px] px-[37px] py-[12px] w-[229px] h-[48px] font-medium text-[20px] leading-[120%] tracking-[-0.01em] text-[#fbfbfb]"
           >
             Get started
             <svg width="14" height="16" className="fill-current text-[#fbfbfb]">
