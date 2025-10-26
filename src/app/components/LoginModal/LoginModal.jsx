@@ -1,16 +1,27 @@
 "use client";
-
+import { auth } from "../../firebase.js";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import React from "react";
 
 const LoginModal = ({ isOpen = false, onClose }) => {
   if (!isOpen) return null;
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.target;
-    const name = form.elements.name.value;
     const email = form.elements.email.value;
     const password = form.elements.password.value;
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      form.reset();
+      onClose?.();
+    } catch (error) {
+      console.error("Error logging user:", error.message);
+    }
   };
 
   return (
@@ -32,14 +43,14 @@ const LoginModal = ({ isOpen = false, onClose }) => {
             name="email"
             type="email"
             placeholder="Email"
-            className="mb-[18px] border border-[rgba(17,16,28,0.1)] rounded-[12px] px-4 py-4 w-full focus:outline-none focus:border-blue-500 placeholder:text-[#11101c] placeholder:text-[16px] placeholder:font-normal placeholder:leading-[1.25]"
+            className="mb-[18px] border border-[rgba(17,16,28,0.1)] rounded-[12px] px-4 py-4 w-full focus:outline-none focus:border-[var(--bg-div)] placeholder:text-[#11101c] placeholder:text-[16px] placeholder:font-normal placeholder:leading-[1.25]"
             required
           />
           <input
             name="password"
             type="password"
             placeholder="Password"
-            className="mb-10 border border-[rgba(17,16,28,0.1)] rounded-[12px] px-4 py-4 w-full focus:outline-none focus:border-blue-500 placeholder:text-[#11101c] placeholder:text-[16px] placeholder:font-normal placeholder:leading-[1.25]"
+            className="mb-10 border border-[rgba(17,16,28,0.1)] rounded-[12px] px-4 py-4 w-full focus:outline-none focus:border-[var(--bg-div)] placeholder:text-[#11101c] placeholder:text-[16px] placeholder:font-normal placeholder:leading-[1.25]"
             required
           />
           <button
