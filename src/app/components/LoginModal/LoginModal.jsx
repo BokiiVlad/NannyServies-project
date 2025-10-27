@@ -2,6 +2,7 @@
 import { auth } from "../../firebase.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useEffect } from "react";
+import PasswordInput from "../PasswordInput/PasswordInput.jsx";
 
 const LoginModal = ({ onClose }) => {
   useEffect(() => {
@@ -69,13 +70,7 @@ const LoginModal = ({ onClose }) => {
             className="mb-[18px] border border-[rgba(17,16,28,0.1)] rounded-[12px] px-4 py-4 w-full focus:outline-none focus:border-[var(--bg-div)] placeholder:text-[#11101c] placeholder:text-[16px] placeholder:font-normal placeholder:leading-[1.25]"
             required
           />
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            className="mb-10 border border-[rgba(17,16,28,0.1)] rounded-[12px] px-4 py-4 w-full focus:outline-none focus:border-[var(--bg-div)] placeholder:text-[#11101c] placeholder:text-[16px] placeholder:font-normal placeholder:leading-[1.25]"
-            required
-          />
+          <PasswordInput />
           <button
             type="submit"
             className="bg-[#103931] text-white font-medium rounded-[30px] w-full h-[52px] hover:bg-[#0d2b26] transition"
