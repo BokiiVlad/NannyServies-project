@@ -1,10 +1,18 @@
 "use client";
 import { auth } from "../../firebase.js";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import React from "react";
+import React, { useEffect } from "react";
 
-const RegisterModal = ({ isOpen = true, onClose }) => {
-  if (!isOpen) return null;
+const RegisterModal = ({ onClose }) => {
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.key === "Escape") {
+        onClose?.();
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [onClose]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,9 +41,17 @@ const RegisterModal = ({ isOpen = true, onClose }) => {
       onClick={() => onClose?.()}
     >
       <div
-        className="w-[565px] bg-[#fbfbfb] p-[64px] rounded-2xl shadow-lg"
+        className="relative w-[565px] bg-[#fbfbfb] p-[64px] rounded-2xl shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
+        <svg
+          onClick={() => onClose?.()}
+          className="absolute top-6 right-6 stroke-[#11101c] stroke-[2.5] cursor-pointer"
+          width="32"
+          height="32"
+        >
+          <use href="/icons/sprite.svg#icon-x"></use>
+        </svg>
         <h2 className="font-medium text-[40px] leading-[1.2] tracking-[-0.02em] text-[#11101c] mb-5">
           Registration
         </h2>

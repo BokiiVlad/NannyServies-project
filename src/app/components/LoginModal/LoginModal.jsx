@@ -1,10 +1,18 @@
 "use client";
 import { auth } from "../../firebase.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import React from "react";
+import React, { useEffect } from "react";
 
-const LoginModal = ({ isOpen = false, onClose }) => {
-  if (!isOpen) return null;
+const LoginModal = ({ onClose }) => {
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.key === "Escape") {
+        onClose?.();
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [onClose]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,12 +33,27 @@ const LoginModal = ({ isOpen = false, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="w-[565px] bg-[#fbfbfb] p-[64px] rounded-2xl shadow-lg ">
+    <div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+      onClick={() => onClose?.()}
+    >
+      <div
+        className="relative w-[565px] bg-[#fbfbfb] p-[64px] rounded-2xl shadow-lg"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <svg
+          onClick={() => onClose?.()}
+          className="absolute top-7 right-7 stroke-[#11101c] stroke-[2.5] cursor-pointer"
+          width="32"
+          height="32"
+        >
+          <use href="/icons/sprite.svg#icon-x"></use>
+        </svg>
+
         <h2 className="font-medium text-[40px] leading-[1.2] tracking-[-0.02em] text-[#11101c] mb-5">
           Log In
         </h2>
-        <p className="text-[16px] leading-[1.25] text-[rgba(17,16,28,0.5)] mb-10 ">
+        <p className="text-[16px] leading-[1.25] text-[rgba(17,16,28,0.5)] mb-10">
           Welcome back! Please enter your credentials to access your account and
           continue your babysitter search.
         </p>
