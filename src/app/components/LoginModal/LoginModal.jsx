@@ -3,6 +3,17 @@ import { auth } from "../../firebase.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useEffect } from "react";
 import PasswordInput from "../PasswordInput/PasswordInput.jsx";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup.object().shape({
+  email: yup.string().email("Invalid email").required("Email is required"),
+  password: yup
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+});
 
 const LoginModal = ({ onClose }) => {
   useEffect(() => {
@@ -15,18 +26,23 @@ const LoginModal = ({ onClose }) => {
     return () => window.removeEventListener("keydown", handleEsc);
   }, [onClose]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const email = form.elements.email.value;
-    const password = form.elements.password.value;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = async (data) => {
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
-        email,
-        password
+        data.email,
+        data.password
       );
-      form.reset();
+      reset();
       onClose?.();
     } catch (error) {
       console.error("Error logging user:", error.message);
@@ -61,19 +77,28 @@ const LoginModal = ({ onClose }) => {
 
         <form
           className="flex flex-col w-full max-w-[438px] mb-10"
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <input
-            name="email"
+            {...register("email")}
             type="email"
             placeholder="Email"
-            className="mb-[18px] border border-[rgba(17,16,28,0.1)] rounded-[12px] px-4 py-4 w-full focus:outline-none focus:border-[var(--bg-div)] placeholder:text-[#11101c] placeholder:text-[16px] placeholder:font-normal placeholder:leading-[1.25]"
-            required
+            className=" border border-[rgba(17,16,28,0.1)] rounded-[12px] px-4 py-4 w-full focus:outline-none focus:border-[var(--bg-div)] placeholder:text-[#11101c] placeholder:text-[16px] placeholder:font-normal placeholder:leading-[1.25]"
           />
-          <PasswordInput />
+          {errors.email && (
+            <p className="ml-1 mt-1 text-red-500 text-sm mb-[18px]">
+              {errors.email.message}
+            </p>
+          )}
+          <PasswordInput {...register("password")} />
+          {errors.password && (
+            <p className="ml-1 mt-1 text-red-500 text-sm mb-[18px]">
+              {errors.password.message}
+            </p>
+          )}
           <button
             type="submit"
-            className="bg-[#103931] text-white font-medium rounded-[30px] w-full h-[52px] hover:bg-[#0d2b26] transition"
+            className="mt-10 bg-[#103931] text-white font-medium rounded-[30px] w-full h-[52px] hover:bg-[#0d2b26] transition"
           >
             Log In
           </button>

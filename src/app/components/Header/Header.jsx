@@ -17,9 +17,11 @@ const Header = () => {
         </p>
 
         <div className="flex gap-23">
-          <nav className="flex items-center gap-10">
-            <Link href="/">Home</Link>
-            <Link href="/nannies">Nannies</Link>
+          <nav className="flex items-center gap-15">
+            <div className="flex gap-10">
+              <Link href="/">Home</Link>
+              <Link href="/nannies">Nannies</Link>
+            </div>
             <AuthNav
               onOpenRegister={() => setIsRegisterOpen(true)}
               onOpenLogin={() => setIsLoginOpen(true)}
