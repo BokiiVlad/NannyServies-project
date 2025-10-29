@@ -6,6 +6,7 @@ import PasswordInput from "../PasswordInput/PasswordInput.jsx";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useRouter } from "next/navigation";
 
 const schema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),
@@ -16,6 +17,8 @@ const schema = yup.object().shape({
 });
 
 const LoginModal = ({ onClose }) => {
+  const router = useRouter();
+
   useEffect(() => {
     const handleEsc = (event) => {
       if (event.key === "Escape") {
@@ -42,7 +45,7 @@ const LoginModal = ({ onClose }) => {
         data.email,
         data.password
       );
-      console.log("Super");
+      router.push("/nannies");
       reset();
       onClose?.();
     } catch (error) {
