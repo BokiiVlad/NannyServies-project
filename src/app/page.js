@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div >
       <header>
-        <Header />
+        <Header variant="home" />
         <Hero />
       </header>
       <main >
