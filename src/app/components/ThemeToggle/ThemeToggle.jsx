@@ -1,12 +1,34 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const ThemeToggle = () => {
   const [enabled, setEnabled] = useState(true);
 
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "blue") {
+      applyThemeColors("#0957C3", "rgba(9, 87, 195, 0.2)", "#074B9A");
+      setEnabled(false);
+    } else {
+      applyThemeColors("#103931", "rgba(16, 57, 49, 0.2)", "#0d2b26");
+      setEnabled(true);
+    }
+  }, []);
+
+  const applyThemeColors = (bg, light, hover) => {
+    document.documentElement.style.setProperty("--bg-div", bg);
+    document.documentElement.style.setProperty("--light-color", light);
+    document.documentElement.style.setProperty("--hover-color", hover);
+  };
+
   const toggleTheme = () => {
-    const newColor = enabled ? "#0957C3" : "#103931";
-    document.documentElement.style.setProperty("--bg-div", newColor);
+    if (enabled) {
+      applyThemeColors("#0957C3", "rgba(9, 87, 195, 0.2)", "#074B9A");
+      localStorage.setItem("theme", "blue");
+    } else {
+      applyThemeColors("#103931", "rgba(16, 57, 49, 0.2)", "#0d2b26");
+      localStorage.setItem("theme", "green");
+    }
     setEnabled(!enabled);
   };
 

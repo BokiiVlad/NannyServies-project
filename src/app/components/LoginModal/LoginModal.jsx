@@ -104,7 +104,7 @@ const LoginModal = ({ onClose }) => {
           )}
           <button
             type="submit"
-            className="mt-10 bg-[#103931] text-white font-medium rounded-[30px] w-full h-[52px] hover:bg-[#0d2b26] transition"
+            className="mt-10 bg-[var(--bg-div)] text-white font-medium rounded-[30px] w-full h-[52px] hover:bg-[var(--hover-color)] transition"
           >
             Log In
           </button>

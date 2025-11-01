@@ -2,7 +2,8 @@
 
 :root {
   --bg-div: #103931;
-  --bg-blue: #1e3a8a;
+  --light-color: rgba(16, 57, 49, 0.2);
+  --hover-color: #0d2b26;
 }
 
 *,
@@ -18,7 +19,7 @@ body {
   font-size: 16px;
   line-height: 1.5;
   color: #fff;
-  background-color: #fff;
+  background-color: #fbfbfb;
   scroll-behavior: smooth;
 }
 

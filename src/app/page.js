@@ -1,19 +1,24 @@
+"use client"
+import { useState } from "react";
 import Header from "./components/Header/Header.jsx";
 import Hero from "./components/Hero/Hero.jsx";
 
-
 export default function Home() {
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
   return (
-    <div >
+    <div>
       <header>
-        <Header variant="home" />
-        <Hero />
+        <Header
+          variant="home"
+          isLoginOpen={isLoginOpen}
+          setIsLoginOpen={setIsLoginOpen}
+        />
       </header>
-      <main >
-        <h1>Home page</h1>
+      <main>
+        <Hero setIsLoginOpen={setIsLoginOpen} />
       </main>
-      <footer >
-      </footer>
+      <footer></footer>
     </div>
   );
 }

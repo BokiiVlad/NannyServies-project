@@ -7,11 +7,11 @@ const ReviewsList = ({ reviews }) => {
         return (
           <li className="" key={index}>
             <div className="flex gap-3 mb-4">
-              <button className=" w-11 h-11 rounded-full bg-[rgba(16,57,49,0.2)] flex items-center justify-center">
-                <p className="font-medium text-[20px] leading-[100%] text-[#103931]">
+              <div className=" w-11 h-11 rounded-full bg-[var(--light-color)] flex items-center justify-center">
+                <p className="font-medium text-[20px] leading-[100%] text-[var(--bg-div)]">
                   {firstLetter}
                 </p>
-              </button>
+              </div>
 
               <div>
                 <p className="font-medium text-base leading-[125%] text-[#11101c] mb-1">

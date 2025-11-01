@@ -46,7 +46,6 @@ const AuthNav = ({ onOpenRegister, onOpenLogin }) => {
       >
         Registration
       </button>
-      <ThemeToggle />
     </div>
   );
 };
