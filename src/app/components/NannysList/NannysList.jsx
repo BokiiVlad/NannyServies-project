@@ -29,9 +29,17 @@ const NannysList = () => {
       <ul className="flex flex-col items-center gap-8">
         {nannies.map((nanny) => (
           <li
-            className="bg-[#FBFBFB] rounded-[30px] p-6 w-[1184px] h-[318px]"
+            className="relative bg-[#FBFBFB] rounded-[30px] p-6 w-[1184px] min-h-[318px]"
             key={nanny.id}
           >
+            {" "}
+            <svg
+              className="stroke-black fill-white absolute top-6 right-6"
+              width="26"
+              height="26"
+            >
+              <use href="/icons/sprite.svg#icon-heart"></use>
+            </svg>
             <NannyCard {...nanny} />
           </li>
         ))}

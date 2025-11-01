@@ -1,4 +1,6 @@
 import { calculateAge } from "@/app/utils/calculateAge.js";
+import { useState } from "react";
+import ReviewsList from "../ReviewsList/ReviewsList.jsx";
 
 const NannyCard = ({
   avatar_url,
@@ -12,10 +14,14 @@ const NannyCard = ({
   about,
   characters,
   birthday,
+  reviews,
 }) => {
+  const [showReviews, setShowReviews] = useState(false);
+
   const stringCharacters = characters
     .map((name) => name[0].toUpperCase() + name.slice(1))
     .join(", ");
+
   const age = calculateAge(birthday);
 
   return (
@@ -39,7 +45,7 @@ const NannyCard = ({
             </h3>
           </div>
 
-          <ul className="flex items-center gap-4">
+          <ul className="flex items-center gap-4 mr-[98px]">
             <li className="flex gap-2 items-center">
               <svg
                 className="stroke-[#11101c] stroke-[1.5] fill-[#FBFBFB]"
@@ -121,7 +127,6 @@ const NannyCard = ({
                 </span>
               </p>
             </li>
-
             <li className="rounded-[24px] px-4 py-2 bg-[#f3f3f3] font-medium text-[16px] leading-[150%] text-[rgba(17,16,28,0.5)]">
               <p>
                 Education:{" "}
@@ -133,9 +138,18 @@ const NannyCard = ({
           </ul>
         </li>
         <li>
-          <p class="font-normal text-[16px] leading-[125%] text-[rgba(17,16,28,0.5)]">
+          <p className="font-normal text-[16px] leading-[125%] text-[rgba(17,16,28,0.5)] mt-4 mb-[6px]">
             {about}
           </p>
+        </li>
+        <li>{showReviews && <ReviewsList reviews={reviews} />}</li>
+        <li>
+          <button
+            onClick={() => setShowReviews((prev) => !prev)}
+            className="font-medium text-[16px] leading-[150%] underline decoration-skip-ink-none text-[#11101c]"
+          >
+            Read more
+          </button>
         </li>
       </ul>
     </div>
