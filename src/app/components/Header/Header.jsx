@@ -3,19 +3,18 @@ import Link from "next/link";
 import { useState } from "react";
 import AuthNav from "../AuthNav/AuthNav.jsx";
 import Modals from "../Modals/Modals.jsx";
-import ThemeToggle from "../ThemeToggle/ThemeToggle.jsx";
 
 const HomeHeader = ({ isLoginOpen, setIsLoginOpen }) => {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
   return (
     <header className="absolute top-0 left-0 w-full bg-transparent z-50">
-      <div className="w-[1244px] mx-auto flex justify-between items-center text-white mt-[52px] pl-[30px] ">
+      <div className="w-[1184px] mx-auto flex justify-between items-center text-white mt-[52px] ">
         <p className="text-[30px] font-medium leading-[117%] tracking-[-0.02em]">
           Nanny.Services
         </p>
 
-        <nav className="flex items-center gap-[60px]">
+        <nav className="flex items-center gap-[92px]">
           <div className="flex gap-10">
             <Link href="/">Home</Link>
             <Link href="/nannies">Nannies</Link>
@@ -25,7 +24,6 @@ const HomeHeader = ({ isLoginOpen, setIsLoginOpen }) => {
               onOpenRegister={() => setIsRegisterOpen(true)}
               onOpenLogin={() => setIsLoginOpen(true)}
             />
-            <ThemeToggle />
           </div>
         </nav>
       </div>

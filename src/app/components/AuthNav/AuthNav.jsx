@@ -2,7 +2,6 @@
 import { useAuth } from "@/hooks/useAuth.js";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase.js";
-import ThemeToggle from "../ThemeToggle/ThemeToggle.jsx";
 
 const AuthNav = ({ onOpenRegister, onOpenLogin }) => {
   const { user, logout, loading } = useAuth();
