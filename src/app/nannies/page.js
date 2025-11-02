@@ -7,7 +7,8 @@ const Nannies = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   return (
-    <section>
+    <section className="bg-[#F3F3F3]">
+
       <HeaderMain
         isLoginOpen={isLoginOpen}
         setIsLoginOpen={setIsLoginOpen}

@@ -1,6 +1,7 @@
 import { calculateAge } from "@/app/utils/calculateAge.js";
 import { useState } from "react";
 import ReviewsList from "../ReviewsList/ReviewsList.jsx";
+import AppointmentForm from "../AppointmentForm/AppointmentForm.jsx";
 
 const NannyCard = ({
   avatar_url,
@@ -15,8 +16,10 @@ const NannyCard = ({
   characters,
   birthday,
   reviews,
+  id,
 }) => {
   const [showReviews, setShowReviews] = useState(false);
+  const [appointmentModal, setAppointmentModal] = useState(false);
 
   const stringCharacters = characters
     .map((name) => name[0].toUpperCase() + name.slice(1))
@@ -26,12 +29,31 @@ const NannyCard = ({
 
   return (
     <div className="flex gap-6">
-      <div className="border-2 border-[rgba(240,63,59,0.2)] rounded-[30px] w-[120px] h-[120px] p-3 ">
+      {appointmentModal && (
+        <AppointmentForm
+          onClose={() => setAppointmentModal(!appointmentModal)}
+          imageUrl={avatar_url}
+          nannyName={name}
+          nannyId={id}
+        />
+      )}
+      <div className="relative border-2 border-[rgba(240,63,59,0.2)] rounded-[30px] w-[120px] h-[120px] p-3 flex-shrink-0">
         <img
-          className="rounded-[15px] w-full h-full object-cover"
+          className="rounded-[15px] w-full h-full object-cover w-[96px] h-[96px]"
           src={avatar_url}
           alt={name}
         />
+        <svg
+          className="absolute top-[9px] right-[14px]"
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="7" cy="7" r="7" fill="#FBFBFB" />
+          <circle cx="6.99967" cy="7.0001" r="4.66667" fill="#38CD3E" />
+        </svg>
       </div>
 
       <ul className="flex flex-col justify-between w-full gap-2">
@@ -144,12 +166,21 @@ const NannyCard = ({
         </li>
         <li>{showReviews && <ReviewsList reviews={reviews} />}</li>
         <li>
-          <button
-            onClick={() => setShowReviews((prev) => !prev)}
-            className="font-medium text-[16px] leading-[150%] underline decoration-skip-ink-none text-[#11101c]"
-          >
-            Read more
-          </button>
+          {showReviews ? (
+            <button
+              className="mt-10 rounded-[30px] px-7 py-[14px] w-[215px] h-12 bg-[#103931] font-medium text-[16px] leading-[125%] tracking-[-0.01em] text-[#fbfbfb]"
+              onClick={() => setAppointmentModal(true)}
+            >
+              Make an appointment
+            </button>
+          ) : (
+            <button
+              onClick={() => setShowReviews((prev) => !prev)}
+              className=" font-medium text-[16px] leading-[150%] underline decoration-skip-ink-none text-[#11101c]"
+            >
+              Read more
+            </button>
+          )}
         </li>
       </ul>
     </div>

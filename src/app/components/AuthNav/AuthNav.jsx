@@ -28,7 +28,7 @@ const AuthNav = ({ onOpenRegister, onOpenLogin }) => {
         onClick={handleLogout}
         className="border border-[rgba(251,251,251,0.4)] rounded-[30px] px-[37px] py-[12px] w-[134px] h-[48px] text-[#fbfbfb] hover:bg-[rgba(251,251,251,0.2)] transition-colors duration-300"
       >
-        Logout
+        Log out
       </button>
     </div>
   ) : (
