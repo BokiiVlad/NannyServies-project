@@ -67,10 +67,10 @@ const CustomSelect = () => {
             <li
               key={option.value}
               onClick={() => handleFilterSelect(option.value, option.label)}
-              className={`px-4 py-[6px] cursor-pointer text-[14px] font-medium leading-[129%] ${
+              className={`px-4 py-[6px] cursor-pointer font-normal text-[18px] leading-[111%]  ${
                 selectedOption === option.label
                   ? "text-[#11101c]"
-                  : "text-[#8a8a89] hover:bg-[#f2f2f2]"
+                  : "text-[rgba(17,16,28,0.3)]"
               }`}
             >
               {option.label}
