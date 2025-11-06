@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 
-const CustomSelect = () => {
+const CustomSelect = ({ setSelectedFilter }) => {
   const [selectIsOpen, setSelectIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("A to Z");
   const selectRef = useRef(null);
@@ -9,8 +9,8 @@ const CustomSelect = () => {
   const filters = [
     { value: "a-z", label: "A to Z" },
     { value: "z-a", label: "Z to A" },
-    { value: "less-10", label: "Less than 10$" },
-    { value: "greater-10", label: "Greater than 10$" },
+    { value: "less-20", label: "Less than 20$" },
+    { value: "greater-20", label: "Greater than 20$" },
     { value: "popular", label: "Popular" },
     { value: "not-popular", label: "Not popular" },
     { value: "show-all", label: "Show all" },
@@ -19,7 +19,10 @@ const CustomSelect = () => {
   const handleFilterSelect = (value, label) => {
     setSelectedOption(label);
     setSelectIsOpen(false);
+    setSelectedFilter(value);
   };
+
+  useEffect(() => setSelectedFilter("a-z"), [setSelectedFilter]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
