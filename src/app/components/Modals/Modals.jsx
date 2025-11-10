@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";

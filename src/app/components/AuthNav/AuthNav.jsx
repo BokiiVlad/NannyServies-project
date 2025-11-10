@@ -2,14 +2,17 @@
 import { useAuth } from "@/hooks/useAuth.js";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase.js";
+import { useRouter } from "next/navigation";
 
 const AuthNav = ({ onOpenRegister, onOpenLogin }) => {
-  const { user, logout, loading } = useAuth();
-
+  const { user, loading } = useAuth();
+  const router = useRouter();
   if (loading) return null;
 
   const handleLogout = async () => {
+    await fetch("/api/logout", { method: "POST" });
     await signOut(auth);
+    router.push("/nannies");
   };
 
   return user ? (

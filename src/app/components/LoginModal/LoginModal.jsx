@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const schema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),
@@ -45,11 +46,22 @@ const LoginModal = ({ onClose }) => {
         data.email,
         data.password
       );
-      router.push("/nannies");
+      const idToken = await userCredential.user.getIdToken();
+
+      const res = await fetch("/api/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken }),
+      });
+
+      const json = await res.json();
+      if (!res.ok || !json.success) throw new Error("Session creation failed");
+
       reset();
       onClose?.();
+      router.push("/nannies");
     } catch (error) {
-      console.error("Error logging user:", error.message);
+      console.error("Error logging in:", error);
     }
   };
 

@@ -118,12 +118,6 @@ const NannysList = () => {
     setHasMore(true);
     fetchNannies(false);
   }, [selectedFilter]);
-  useEffect(() => {
-    setNannies([]);
-    setLastDoc(null);
-    setHasMore(true);
-    fetchNannies(false);
-  }, [selectedFilter]);
 
   return (
     <section>
