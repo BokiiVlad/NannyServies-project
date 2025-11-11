@@ -2,6 +2,7 @@ import { calculateAge } from "@/app/utils/calculateAge.js";
 import { useState } from "react";
 import ReviewsList from "../ReviewsList/ReviewsList.jsx";
 import AppointmentForm from "../AppointmentForm/AppointmentForm.jsx";
+import FavoriteButton from "../FavoriteButton/FavoriteButton.jsx";
 
 const NannyCard = ({
   avatar_url,
@@ -28,7 +29,8 @@ const NannyCard = ({
   const age = calculateAge(birthday);
 
   return (
-    <div className="flex gap-6">
+    <div className="relative flex gap-6">
+      <FavoriteButton nannyId={id} />
       {appointmentModal && (
         <AppointmentForm
           onClose={() => setAppointmentModal(!appointmentModal)}
