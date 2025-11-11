@@ -8,7 +8,7 @@ const HomeHeader = ({ isLoginOpen, setIsLoginOpen }) => {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
   return (
-    <header className="absolute top-0 left-0 w-full bg-transparent z-50">
+    <div className="absolute top-0 left-0 w-full bg-transparent z-50">
       <div className="w-[1184px] mx-auto flex justify-between items-center text-white mt-[52px] ">
         <p className="text-[30px] font-medium leading-[117%] tracking-[-0.02em]">
           Nanny.Services
@@ -34,7 +34,7 @@ const HomeHeader = ({ isLoginOpen, setIsLoginOpen }) => {
         isRegisterOpen={isRegisterOpen}
         setIsRegisterOpen={setIsRegisterOpen}
       />
-    </header>
+    </div>
   );
 };
 

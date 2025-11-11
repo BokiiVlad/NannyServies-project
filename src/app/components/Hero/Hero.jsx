@@ -10,7 +10,7 @@ const Hero = ({ setIsLoginOpen }) => {
   return (
     <section className="bg-[#fbfbfb]">
       <div
-        className="pl-24 relative w-[1376px] h-[736px] my-8 mx-auto rounded-[30px] overflow-hidden border border-[rgba(251,251,251,0.4)] "
+        className="pl-24 relative w-[1376px] h-[736px]  mx-auto rounded-[30px] overflow-hidden border border-[rgba(251,251,251,0.4)] "
         style={{ backgroundColor: "var(--bg-div)" }}
       >
         <div className="absolute w-[284px] h-[118px] bg-[#fbfbfb] rounded-[20px] bottom-[50px] right-[50px] z-51 flex items-center justify-center gap-4">

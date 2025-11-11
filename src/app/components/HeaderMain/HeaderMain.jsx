@@ -20,7 +20,7 @@ const HeaderMain = ({ isLoginOpen, setIsLoginOpen }) => {
   }, []);
 
   return (
-    <header className="bg-[var(--bg-div)]">
+    <div className="bg-[var(--bg-div)]">
       <div className="w-[1184px] mx-auto flex justify-between items-center text-white pt-6 pb-6">
         <p className="text-[30px] font-medium leading-[117%] tracking-[-0.02em]">
           Nanny.Services
@@ -122,7 +122,7 @@ const HeaderMain = ({ isLoginOpen, setIsLoginOpen }) => {
         isRegisterOpen={isRegisterOpen}
         setIsRegisterOpen={setIsRegisterOpen}
       />
-    </header>
+    </div>
   );
 };
 

@@ -7,7 +7,7 @@ export default function Home() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   return (
-    <div>
+    <div className="bg-[rgb(251,251,251)] min-h-screen pt-[32px]">
       <header>
         <Header
           variant="home"
