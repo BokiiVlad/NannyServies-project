@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { auth, db } from "../firebase.js";
 import {
   doc,
@@ -9,69 +9,62 @@ import {
   query,
   where,
 } from "firebase/firestore";
-
-import { RotatingLines } from "react-loader-spinner";
 import NannyCard from "../components/NannyCard/NannyCard.jsx";
 import HeaderMain from "../components/HeaderMain/HeaderMain.jsx";
+import { RotatingLines } from "react-loader-spinner";
 
 const FavoriteNanniesList = () => {
   const [nannies, setNannies] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const fetchFavorites = useCallback(async (uid) => {
-    setLoading(true);
-    try {
-      const userRef = doc(db, "users", uid);
-      const userSnap = await getDoc(userRef);
-      const favoriteIds = userSnap.data()?.favorites || [];
-
-      if (favoriteIds.length === 0) {
-        setNannies([]);
-        return;
-      }
-
-      const batches = [];
-      for (let i = 0; i < favoriteIds.length; i += 10) {
-        const batchIds = favoriteIds.slice(i, i + 10);
-        const q = query(
-          collection(db, "babysitters"),
-          where("__name__", "in", batchIds)
-        );
-        batches.push(getDocs(q));
-      }
-
-      const results = await Promise.all(batches);
-      const data = results.flatMap((snapshot) =>
-        snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-      );
-
-      setNannies(data);
-    } catch (err) {
-      console.error("Failed to fetch favorite nannies:", err);
-      setNannies([]);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) fetchFavorites(user.uid);
-      else {
+      setUserId(user?.uid || null);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (!userId) return;
+    const fetchFavorites = async () => {
+      setLoading(true);
+      try {
+        const userRef = doc(db, "users", userId);
+        const userSnap = await getDoc(userRef);
+        const favoriteIds = userSnap.data()?.favorites || [];
+
+        if (!favoriteIds.length) {
+          setNannies([]);
+          return;
+        }
+
+        const babysittersRef = collection(db, "babysitters");
+        const q = query(
+          babysittersRef,
+          where("__name__", "in", favoriteIds.slice(0, 10))
+        );
+        const querySnapshot = await getDocs(q);
+        const data = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setNannies(data);
+      } catch (err) {
+        console.error(err);
         setNannies([]);
+      } finally {
         setLoading(false);
       }
-    });
-
-    return () => unsubscribe();
-  }, [fetchFavorites]);
+    };
+    fetchFavorites();
+  }, [userId]);
 
   return (
     <div className="pb-[100px]">
       <HeaderMain />
-
-      {loading && (
-        <div className="flex justify-center items-center mt-[100px]">
+      {loading ? (
+        <div className="flex justify-center items-center h-[calc(100vh-100px)]">
           <RotatingLines
             strokeColor="#103931"
             strokeWidth="4"
@@ -80,15 +73,7 @@ const FavoriteNanniesList = () => {
             visible={true}
           />
         </div>
-      )}
-
-      {!loading && nannies.length === 0 && (
-        <p className="text-center mt-[100px] text-2xl">
-          No favorite nannies yet.
-        </p>
-      )}
-
-      {!loading && nannies.length > 0 && (
+      ) : nannies.length ? (
         <ul className="flex flex-col items-center gap-8 mt-[64px] mb-[64px]">
           {nannies.map((nanny) => (
             <li
@@ -99,6 +84,10 @@ const FavoriteNanniesList = () => {
             </li>
           ))}
         </ul>
+      ) : (
+        <p className="text-center mt-[100px] text-2xl">
+          No favorite nannies yet.
+        </p>
       )}
     </div>
   );
