@@ -19,14 +19,14 @@ const PasswordInput = forwardRef(({ ...props }, ref) => {
       <button
         type="button"
         onClick={togglePassword}
-        className="absolute right-[18px] bottom-[15px] bg-white rounded-full p-1"
+        className="absolute right-[18px] bottom-[15px] bg-white rounded-full p-1 text-#F3F3F3"
       >
         {showPassword ? (
-          <svg width="20" height="20" stroke="black" fill="white">
+          <svg width="20" height="20" stroke="black" fill="#F3F3F3">
             <use href="/icons/sprite.svg#icon-eye-off"></use>
           </svg>
         ) : (
-          <svg width="20" height="20" stroke="black" fill="white">
+          <svg width="20" height="20" stroke="black" fill="#F3F3F3">
             <use href="/icons/sprite.svg#icon-eye"></use>
           </svg>
         )}
